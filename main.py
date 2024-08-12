@@ -4,7 +4,7 @@ import os
 from Qrcode import generateQrWithText,welcomeMsg,decodeQrImg
 
 # bot token
-API_TOKEN = "7438666344:AAG2Z5JSZ4maVCu4fY4CMTnYTnQQuTjLwQc"
+API_TOKEN = "7227224228:AAH6J32_sXkBLBiWK9u_LOBuCc2744mfgII"
 
 # /start command handler
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
