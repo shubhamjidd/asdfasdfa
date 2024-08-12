@@ -1,7 +1,5 @@
 import qrcode # type: ignore
-from PIL import Image # type: ignore
-from pyzbar.pyzbar import decode # type: ignore
-
+import cv2 #type: ignore
 # generate QR Code 
 def generateQrWithText(Data:str)-> None:
     try:
@@ -21,18 +19,25 @@ def generateQrWithText(Data:str)-> None:
 
 
 # decode qr code image
-
-def decodeQrImg(fileName:str)->str:
+def decodeQrImg(fileName: str) -> str:
     try:
-        image = Image.open(fileName)
-        decoded_objects = decode(image)
-        for obj in decoded_objects:
-            qr_data = obj.data.decode('utf-8')
-            return qr_data
+        # Load the image from file
+        image = cv2.imread(fileName)
+        # Create an instance of QRCodeDetector
+        detector = cv2.QRCodeDetector()
+                
+        # Detect and decode the QR code
+        value, pts, qr_code = detector.detectAndDecode(image)
+        
+        # Return the decoded data
+        if value:
+            return value
+        else:
+            return "No QR code found"
     except Exception as e:
-        # Log the exception or handle it as needed
-        print(f"An error occurred in decode image : {e}")
-
+        print(f"An error occurred in decode image: {e}")
+        return "Error decoding image"
+        
 
 # welcome Msg 
 def welcomeMsg(firstName:str)->str:
