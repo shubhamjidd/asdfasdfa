@@ -1,16 +1,10 @@
 from telegram import Update # type: ignore
-from telegram.ext import Application, CommandHandler, ContextTypes,Bot # type: ignore
+from telegram.ext import Application, CommandHandler, ContextTypes,MessageHandler,filters # type: ignore
 import os
 from Qrcode import generateQrWithText,welcomeMsg,decodeQrImg
 
 # bot token
 API_TOKEN = "7438666344:AAG2Z5JSZ4maVCu4fY4CMTnYTnQQuTjLwQc"
-
-
-# https://asdfasdfa.onrender.com
-bot =Bot(token=API_TOKEN)
-webhook_url = 'https://your-domain.com/webhook'
-bot.set_webhook(url=webhook_url)
 
 # /start command handler
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -23,8 +17,9 @@ async def generateQr(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     if textInput:
         try:
             generateQrWithText(textInput)
-            await update.message.reply_photo(photo=open("msg.png", "rb"))
-            os.remove("msg.png")
+            ls = await update.message.reply_photo(photo=open("msg.png", "rb"))
+            if ls:
+                os.remove("msg.png")
         except Exception as e:
             print(f"Error in generating QR code: {e}")
     else :
