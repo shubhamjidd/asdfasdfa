@@ -1,5 +1,5 @@
 from telegram import Update # type: ignore
-from telegram.ext import Application, CommandHandler, ContextTypes,Bot# type: ignore
+from telegram.ext import Application, CommandHandler, ContextTypes,Bot # type: ignore
 import os
 from Qrcode import generateQrWithText,welcomeMsg,decodeQrImg
 
